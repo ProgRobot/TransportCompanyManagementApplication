@@ -1,7 +1,10 @@
 package metier;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -37,8 +40,14 @@ public class SocieteTransport implements IAdminTransport, IClientTransport, Seri
 	}
 
 	@Override
-	public File lireFichierCragaisons(File fichierCargaison) {
-		return null;
+	public Map<String, Cargaison> lireFichierCragaisons(String nomFichier) {
+		/*
+		File f = new File(nomFichier);
+		FileInputStream fis = new FileInputStream(f);
+		ObjectInputStream ois = new FileInputStream(fis);
+		Cargaison op  
+		*/
+		
 	}
 
 	@Override
