@@ -1,6 +1,9 @@
 package metier;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import iMetier.IAdminTransport;
@@ -8,7 +11,7 @@ import iMetier.IClientTransport;
 import model.Cargaison;
 import model.Marchandise;
 
-class SocieteTransport implements IAdminTransport, IClientTransport {
+class SocieteTransport implements IAdminTransport, IClientTransport, Serializable {
 
 	private HashMap<String, Cargaison> cargaisons;
 	
@@ -28,38 +31,40 @@ class SocieteTransport implements IAdminTransport, IClientTransport {
 
 	@Override
 	public File lireFichierCragaisons(File fichierCargaison) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public HashMap<String, Cargaison> consulterToutCargaison() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.cargaisons;
 	}
 
 	@Override
 	public void ajouterNouvelleCargaison(Cargaison cargaison) {
-		// TODO Auto-generated method stub
-		
+		this.cargaisons.put(cargaison.getReferenceCargaison(), cargaison);
 	}
 
 	@Override
 	public void ajouterMarchandiseACargaison(Cargaison cargaison, Marchandise marchandise) {
-		// TODO Auto-generated method stub
-		
+		this.cargaisons.get(cargaison.getReferenceCargaison()).addMarchandise(marchandise);		
 	}
 
 	@Override
-	public void supprimerCargaison() {
-		// TODO Auto-generated method stub
-		
+	public void supprimerCargaison(String referenceCargaison) {
+		cargaisons.remove(cargaisons.get(referenceCargaison).getReferenceCargaison());
 	}
 
 	@Override
-	public void enregistrerCargaisonFichier() {
-		// TODO Auto-generated method stub
-		
+	public void enregistrerCargaisonFichier(String nomFichier) {
+		File file = new File(nomFichier);
+		try {
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(this.cargaisons);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 	
 	

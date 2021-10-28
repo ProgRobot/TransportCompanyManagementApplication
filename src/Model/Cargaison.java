@@ -44,6 +44,14 @@ public abstract class Cargaison {
 	public Marchandise getMarchandise(Integer numeroMarchandise) {
 		return this.marchandises.get(numeroMarchandise);
 	}
+
+	public String getReferenceCargaison() {
+		return this.referenceCargaison;
+	}
+	
+	public void addMarchandise(Marchandise marchandise) {
+		this.marchandises.put(marchandise.numeroMarchandise, marchandise);
+	}
 	
 
 }
