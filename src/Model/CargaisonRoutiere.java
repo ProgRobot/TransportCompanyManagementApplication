@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class CargaisonRoutiere extends Cargaison {
 
-	public CargaisonRoutiere(HashMap<String, Marchandise> marchandises) {
-		super(marchandises);
+	public CargaisonRoutiere(String referenceCargaison, double distanceParcours) {
+		super(referenceCargaison, distanceParcours);
+		System.out.println("TYPE:: Routiere");
 	}
-
+	
 	@Override
 	public double coutCargaison() {
 		if (this.calculVolumeCargaison()<380000) return 4*this.distanceParcours*this.calculPoidsCargaison();

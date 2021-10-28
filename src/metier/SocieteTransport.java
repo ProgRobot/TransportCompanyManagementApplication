@@ -5,18 +5,25 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import iMetier.IAdminTransport;
 import iMetier.IClientTransport;
 import model.Cargaison;
 import model.Marchandise;
 
-class SocieteTransport implements IAdminTransport, IClientTransport, Serializable {
+public class SocieteTransport implements IAdminTransport, IClientTransport, Serializable {
 
-	private HashMap<String, Cargaison> cargaisons;
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	private HashMap<String, Cargaison> cargaisons = null;
 	
 	public SocieteTransport() {
 		this.cargaisons = new HashMap<String, Cargaison>() ;
+		System.out.println("SocieteTransport Creation:: SUCCESS :)");
 	}
 
 	@Override
@@ -31,7 +38,6 @@ class SocieteTransport implements IAdminTransport, IClientTransport, Serializabl
 
 	@Override
 	public File lireFichierCragaisons(File fichierCargaison) {
-		
 		return null;
 	}
 
@@ -46,10 +52,10 @@ class SocieteTransport implements IAdminTransport, IClientTransport, Serializabl
 	}
 
 	@Override
-	public void ajouterMarchandiseACargaison(Cargaison cargaison, Marchandise marchandise) {
-		this.cargaisons.get(cargaison.getReferenceCargaison()).addMarchandise(marchandise);		
+	public void ajouterMarchandiseACargaison(String referenceCargaison, Marchandise marchandise) {
+		this.cargaisons.get(referenceCargaison).addMarchandise(marchandise);
 	}
-
+	
 	@Override
 	public void supprimerCargaison(String referenceCargaison) {
 		cargaisons.remove(cargaisons.get(referenceCargaison).getReferenceCargaison());
@@ -58,15 +64,20 @@ class SocieteTransport implements IAdminTransport, IClientTransport, Serializabl
 	@Override
 	public void enregistrerCargaisonFichier(String nomFichier) {
 		File file = new File(nomFichier);
+		System.out.println(nomFichier+" creation:: SUCCCESS");
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(this.cargaisons);
+			
+			for (Map.Entry<String, Cargaison> entry : this.cargaisons.entrySet()) {
+				oos.writeObject(entry.getValue());
+			}
+			
+			System.out.println("Cargaisons serialization & writing to "+nomFichier+" :: SUCCCESS");
+			oos.close();
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
-	
-
 }

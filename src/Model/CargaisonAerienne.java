@@ -4,8 +4,9 @@ import java.util.HashMap;
 
 public class CargaisonAerienne extends Cargaison {
 
-	public CargaisonAerienne(HashMap<String, Marchandise> marchandises) {
-		super(marchandises);
+	public CargaisonAerienne(String referenceCargaison, double distanceParcours) {
+		super(referenceCargaison, distanceParcours);
+		System.out.println("TYPE:: Aerienne");
 	}
 
 	@Override
