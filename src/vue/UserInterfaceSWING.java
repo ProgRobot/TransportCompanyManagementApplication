@@ -47,6 +47,8 @@ public class UserInterfaceSWING extends JFrame {
         txtEditMe.setPreferredSize( new Dimension( 120,  30 ) );
         contentPane.add( txtEditMe );
         
+        
+        
 	}
 
 
@@ -56,7 +58,6 @@ public class UserInterfaceSWING extends JFrame {
 		UIManager.setLookAndFeel(new NimbusLookAndFeel());
 		UserInterfaceSWING  myWindow = new UserInterfaceSWING ();
         myWindow.setVisible( true );
-		        
 		        
 		        	        
 	}
